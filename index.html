@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mohammed Affan — Full-Stack Developer, Bangalore</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Mohammed Affan — full-stack developer in Bangalore building internal tools, automations, and API integrations for early-stage startups.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0B0D10;
+    --bg-raised: #14171C;
+    --bg-raised2: #1B1F26;
+    --ink: #ECEDEE;
+    --ink-soft: #9BA1A8;
+    --ink-faint: #5C6168;
+    --accent: #6E8BFF;
+    --accent-dim: rgba(110,139,255,0.12);
+    --good: #34D399;
+    --stamp: #F2A65A;
+    --stamp-soft: rgba(242,166,90,0.08);
+    --line: #232730;
+    --radius: 8px;
+    --max: 780px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    position: relative;
+  }
+
+  body::before{
+    content:"";
+    position:fixed; top:0; left:0; width:100%; height:3px;
+    background: linear-gradient(90deg, var(--accent), var(--good), var(--stamp));
+    z-index: 100;
+  }
+
+  #bg-canvas{
+    position: fixed; top:0; left:0; width:100%; height:100%;
+    z-index: 0; pointer-events: none;
+  }
+  .bg-wash{
+    position: fixed; top:0; left:0; width:100%; height:100%;
+    z-index: 0; pointer-events: none;
+    background: radial-gradient(ellipse 70% 50% at 50% -10%, rgba(110,139,255,0.16), transparent 60%),
+                radial-gradient(ellipse 60% 40% at 100% 100%, rgba(242,166,90,0.08), transparent 60%);
+  }
+
+  h1, h2, h3{
+    font-family: 'Space Grotesk', sans-serif;
+    margin: 0;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+
+  a{ color: var(--accent); text-decoration: none; }
+  a:hover{ text-decoration: underline; }
+  a:focus-visible, button:focus-visible, input:focus-visible{
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .mono{ font-family: 'JetBrains Mono', monospace; }
+  .grad-text{
+    background: linear-gradient(90deg, var(--accent), var(--good));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .wrap{ max-width: var(--max); margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+  /* ---------- Nav ---------- */
+  .bl-nav{
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(11,13,16,0.78);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+    transition: box-shadow .25s ease;
+  }
+  .bl-nav.scrolled{ box-shadow: 0 4px 24px rgba(0,0,0,0.35); }
+  .bl-nav-inner{
+    max-width: var(--max); margin: 0 auto; padding: 14px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 10px;
+  }
+  .bl-mark{ font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.1rem; }
+  .bl-nav-links{ display: flex; gap: 22px; font-size: 0.92rem; font-weight: 500; }
+  .bl-nav-links a{ color: var(--ink-soft); transition: color .15s ease; }
+  .bl-nav-links a:hover{ color: var(--accent); text-decoration:none; }
+  .bl-status{
+    display: flex; align-items: center; gap: 7px;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;
+    color: var(--ink-soft); letter-spacing: 0.04em;
+  }
+  .bl-dot{ width: 7px; height: 7px; border-radius: 50%; background: var(--good); animation: pulse 2.4s infinite; }
+  @keyframes pulse{
+    0%{ box-shadow: 0 0 0 0 rgba(52,211,153,0.45); }
+    70%{ box-shadow: 0 0 0 6px rgba(52,211,153,0); }
+    100%{ box-shadow: 0 0 0 0 rgba(52,211,153,0); }
+  }
+
+  /* ---------- Hero ---------- */
+  .bl-hero{ padding: 90px 0 64px; }
+  .bl-eyebrow{
+    font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--stamp);
+    margin-bottom: 18px;
+  }
+  .bl-hero h1{ font-size: clamp(2rem, 4.6vw, 2.85rem); line-height: 1.18; font-weight: 700; max-width: 640px; }
+  .bl-hero-sub{ margin-top: 18px; font-size: 1.1rem; color: var(--ink-soft); max-width: 540px; }
+
+  .terminal-line{
+    margin-top: 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.92rem;
+    color: var(--good);
+    min-height: 1.4em;
+  }
+  .terminal-line .prompt{ color: var(--ink-faint); margin-right: 8px; }
+  .terminal-line .cursor{ display:inline-block; width:8px; background: var(--good); margin-left:2px; animation: blink 1s step-end infinite; }
+  @keyframes blink{ 50%{ opacity: 0; } }
+
+  .bl-cta-row{ margin-top: 28px; display: flex; gap: 14px; flex-wrap: wrap; }
+  .bl-eyebrow, .bl-hero h1, .bl-hero-sub, .terminal-line, .bl-cta-row{ animation: fadeUp .7s ease both; }
+  .bl-hero h1{ animation-delay: .06s; }
+  .bl-hero-sub{ animation-delay: .14s; }
+  .terminal-line{ animation-delay: .2s; }
+  .bl-cta-row{ animation-delay: .28s; }
+  @keyframes fadeUp{ from{ opacity:0; transform: translateY(16px); } to{ opacity:1; transform:none; } }
+
+  .btn{
+    display: inline-block; font-family: 'Inter', sans-serif; font-weight: 600;
+    font-size: 0.92rem; padding: 12px 22px; border-radius: var(--radius);
+    border: 1px solid transparent; cursor: pointer;
+    transition: transform .15s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+  }
+  .btn-primary{ background: var(--accent); color: #0B0D10; }
+  .btn-primary:hover{ box-shadow: 0 8px 24px rgba(110,139,255,0.3); transform: translateY(-1px); }
+  .btn-ghost{ background: transparent; color: var(--ink); border: 1px solid var(--line); }
+  .btn-ghost:hover{ border-color: var(--accent); color: var(--accent); transform: translateY(-1px); text-decoration:none; }
+  .btn:active{ transform: scale(0.97); }
+
+  /* ---------- Section shell ---------- */
+  section{ padding: 56px 0; border-top: 1px solid var(--line); position: relative; }
+  .bl-head{ margin-bottom: 30px; }
+  .bl-head h2{ font-size: 1.55rem; }
+  .bl-head .bl-eyebrow{ margin-bottom: 10px; }
+  .bl-note{ margin-top: 8px; font-size: 0.92rem; color: var(--ink-soft); }
+
+  .reveal{ opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.is-visible{ opacity: 1; transform: none; }
+
+  /* ---------- About ---------- */
+  .bl-about-body{ font-size: 1rem; color: var(--ink-soft); max-width: 600px; }
+  .bl-avatar{
+    width: 58px; height: 58px; border-radius: 50%;
+    background: var(--accent-dim); color: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.05rem;
+    margin-bottom: 18px;
+    box-shadow: 0 0 0 5px rgba(110,139,255,0.08);
+  }
+  .bl-stack-group{ margin-top: 28px; }
+  .bl-stack-label{
+    font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--ink-faint); margin-bottom: 10px; display: block;
+  }
+  .bl-chips{ display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+  .bl-chip{
+    font-family: 'JetBrains Mono', monospace; font-size: 0.78rem;
+    padding: 5px 11px; border: 1px solid var(--line); border-radius: 4px;
+    background: var(--bg-raised); color: var(--ink-soft);
+    transition: border-color .15s ease, color .15s ease;
+  }
+  .bl-chip:hover{ border-color: var(--accent); color: var(--accent); }
+
+  /* ---------- Builds ---------- */
+  .bl-card{
+    position: relative; overflow: hidden;
+    background: var(--bg-raised);
+    border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 24px 24px 22px; margin-bottom: 18px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    transition: border-color .2s ease, box-shadow .2s ease;
+  }
+  .bl-card::before{
+    content:""; position: absolute; top:0; left:0; width:100%; height:100%;
+    background: radial-gradient(220px circle at var(--mx,50%) var(--my,50%), rgba(110,139,255,0.14), transparent 70%);
+    opacity: 0; transition: opacity .25s ease; pointer-events: none;
+  }
+  .bl-card:hover{ border-color: var(--accent); box-shadow: 0 10px 32px rgba(0,0,0,0.4); }
+  .bl-card:hover::before{ opacity: 1; }
+  .bl-tag{
+    display: inline-block; font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem; letter-spacing: 0.07em; text-transform: uppercase;
+    border: 1.4px solid var(--stamp); color: var(--stamp); background: var(--stamp-soft);
+    padding: 3px 9px; border-radius: 3px; transform: rotate(-1.5deg); margin-bottom: 12px;
+  }
+  .bl-card h3{ font-size: 1.18rem; margin-bottom: 10px; }
+  .bl-card p{ color: var(--ink-soft); font-size: 0.95rem; margin: 0 0 14px; }
+  .bl-card .bl-chips{ margin-bottom: 12px; }
+  .bl-card-link{ font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; }
+  .bl-card-open{ background: var(--accent-dim); border: 1.5px dashed var(--accent); }
+  .bl-card-open .bl-tag{ border-color: var(--accent); color: var(--accent); background: rgba(110,139,255,0.08); }
+
+  /* ---------- Ask / Chat ---------- */
+  .terminal-chat{
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .chat-titlebar{
+    display:flex; align-items:center; gap:8px;
+    padding: 10px 14px; border-bottom: 1px solid var(--line);
+    font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--ink-faint);
+  }
+  .chat-titlebar span.tdot{ width:9px; height:9px; border-radius:50%; }
+  .td1{ background:#FF5F57; } .td2{ background:#FEBC2E; } .td3{ background:#28C840; }
+  .chat-window{
+    max-height: 320px; overflow-y: auto; padding: 18px;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .chat-msg{
+    font-family: 'JetBrains Mono', monospace; font-size: 0.88rem;
+    padding: 10px 14px; border-radius: 8px; max-width: 85%; line-height: 1.5;
+  }
+  .chat-msg.bot{ background: var(--bg-raised2); color: var(--ink-soft); align-self: flex-start; }
+  .chat-msg.user{ background: var(--accent-dim); color: var(--ink); align-self: flex-end; }
+  .chat-msg.error{ background: rgba(242,166,90,0.1); color: var(--stamp); align-self: flex-start; }
+  .chat-quick{ display:flex; gap:8px; flex-wrap:wrap; padding: 0 18px 14px; }
+  .chip-btn{
+    font-family: 'JetBrains Mono', monospace; font-size: 0.76rem;
+    background: transparent; border: 1px solid var(--line); color: var(--ink-soft);
+    padding: 6px 10px; border-radius: 14px; cursor: pointer; transition: border-color .15s ease, color .15s ease;
+  }
+  .chip-btn:hover{ border-color: var(--accent); color: var(--accent); }
+  .chat-input-row{ display:flex; gap:10px; padding: 14px 18px; border-top: 1px solid var(--line); }
+  #chat-input{
+    flex:1; background: var(--bg); border: 1px solid var(--line); border-radius: 6px;
+    padding: 10px 12px; color: var(--ink); font-family: 'JetBrains Mono', monospace; font-size: 0.88rem;
+  }
+  #chat-input::placeholder{ color: var(--ink-faint); }
+  #chat-input:focus{ border-color: var(--accent); outline: none; }
+
+  /* ---------- Contact ---------- */
+  .bl-contact-grid{ display: flex; gap: 40px; flex-wrap: wrap; }
+  .bl-contact-text{ flex: 1 1 320px; }
+  .bl-contact-text p{ color: var(--ink-soft); max-width: 420px; }
+  .bl-contact-list{ flex: 1 1 240px; font-size: 0.95rem; }
+  .bl-contact-list div{ margin-bottom: 12px; color: var(--ink-soft); }
+  .bl-contact-list .label{
+    display: block; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem;
+    letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 2px;
+  }
+  .copy-btn{
+    background: none; border: none; color: var(--accent);
+    font-family: 'JetBrains Mono', monospace; font-size: 0.78rem;
+    cursor: pointer; margin-left: 8px; padding: 0;
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    padding: 28px 0 50px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem;
+    color: var(--ink-faint); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+    position: relative; z-index: 1;
+  }
+  .bl-social a{ color: var(--ink-faint); margin-left: 14px; }
+  .bl-social a:hover{ color: var(--accent); }
+
+  /* ---------- Toast ---------- */
+  .toast{
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: var(--bg-raised2); color: var(--ink); border: 1px solid var(--line);
+    padding: 11px 20px; border-radius: 8px;
+    font-family: 'JetBrains Mono', monospace; font-size: 0.82rem;
+    opacity: 0; transition: opacity .25s ease, transform .25s ease;
+    pointer-events: none; z-index: 200; max-width: 90vw; text-align: center;
+  }
+  .toast.show{ opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+    .reveal{ opacity: 1; transform: none; }
+  }
+
+  @media (max-width: 560px){
+    .bl-nav-links{ gap: 14px; font-size: 0.85rem; }
+    .bl-hero{ padding: 64px 0 44px; }
+    .bl-contact-grid{ gap: 28px; }
+    .chat-msg{ max-width: 92%; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="bg-canvas"></canvas>
+<div class="bg-wash"></div>
+
+<nav class="bl-nav">
+  <div class="bl-nav-inner">
+    <span class="bl-mark">MA<span style="color:var(--accent)">.</span></span>
+    <div class="bl-nav-links">
+      <a href="#work">Work</a>
+      <a href="#ask">Ask AI</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="bl-status"><span class="bl-dot"></span>OPEN FOR CONTRACT WORK</div>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <section class="bl-hero" style="border-top:none;">
+    <div class="bl-eyebrow">BUILD LOG — UPDATED JUN 2026</div>
+    <h1>I build the tools, integrations, and automations early-stage <span class="grad-text">startups</span> don't have time to build themselves.</h1>
+    <p class="bl-hero-sub">Full-stack developer based in Bangalore. I take on fixed-scope work — internal dashboards, workflow automation, API integrations — usually delivered in 1–3 weeks.</p>
+    <div class="terminal-line"><span class="prompt">$</span><span id="typed-text"></span><span class="cursor">&nbsp;</span></div>
+    <div class="bl-cta-row">
+      <a href="#ask" class="btn btn-primary">Talk to my AI assistant</a>
+      <a href="mailto:mohammadaffan1239@mail.com" class="btn btn-ghost mailto-trigger">Email me</a>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="bl-head">
+      <div class="bl-eyebrow">WHO'S BUILDING</div>
+      <h2>About</h2>
+    </div>
+    <div class="reveal">
+      <div class="bl-avatar">MA</div>
+      <p class="bl-about-body">I'm Mohammed Affan — a full-stack developer focused on practical software: the kind that removes one specific bottleneck rather than chasing buzzwords. I work mainly with Python and modern web stacks, and I'm building hands-on depth in applied machine learning and automation, since that's where a lot of early-stage startups need quick, scoped help.</p>
+      <p class="bl-about-body">I'm early in taking on contract work — which means every project I pick up gets my full attention and a fast turnaround, not a slot in a queue behind ten other clients.</p>
+    </div>
+    <div class="bl-stack-group reveal">
+      <span class="bl-stack-label">Languages</span>
+      <div class="bl-chips">
+        <span class="bl-chip">Python</span><span class="bl-chip">JavaScript</span><span class="bl-chip">SQL</span>
+      </div>
+      <span class="bl-stack-label">Frameworks &amp; Libraries</span>
+      <div class="bl-chips">
+        <span class="bl-chip">Flask</span><span class="bl-chip">FastAPI</span><span class="bl-chip">React</span>
+        <span class="bl-chip">Pandas</span><span class="bl-chip">scikit-learn</span><span class="bl-chip">TensorFlow</span>
+      </div>
+      <span class="bl-stack-label">Tools</span>
+      <div class="bl-chips">
+        <span class="bl-chip">Git</span><span class="bl-chip">Docker</span>
+        <span class="bl-chip">AWS (EC2 / SageMaker basics)</span><span class="bl-chip">REST APIs</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="bl-head">
+      <div class="bl-eyebrow">RECENT BUILDS</div>
+      <h2>What I've been building</h2>
+      <p class="bl-note">What's below is practice and personal work while I take on more contract projects — I'll keep this updated as client work comes in.</p>
+    </div>
+    <div class="bl-card reveal">
+      <span class="bl-tag">Practice build</span>
+      <h3>Diabetes risk prediction model</h3>
+      <p>Built a machine learning pipeline that predicts diabetes risk from patient health data. Covered data cleaning, feature selection, and model evaluation — including the tradeoff between catching more true cases and avoiding false alarms, which matters a lot in a health-screening context.</p>
+      <div class="bl-chips">
+        <span class="bl-chip">Python</span><span class="bl-chip">scikit-learn</span><span class="bl-chip">TensorFlow</span><span class="bl-chip">Pandas</span>
+      </div>
+      <a class="bl-card-link" href="https://github.com/affan123459/diabetes-detector/tree/master" target="_blank" rel="noopener">View code on GitHub →</a>
+    </div>
+    <div class="bl-card reveal">
+      <span class="bl-tag">Practice build</span>
+      <h3>ML model deployed as a live API</h3>
+      <p>Trained a logistic regression model on the Titanic dataset, then wrapped it in a Flask REST API so it could take live requests and return predictions — practicing the full path from a notebook model to something that behaves like a real backend service.</p>
+      <div class="bl-chips">
+        <span class="bl-chip">Python</span><span class="bl-chip">Flask</span><span class="bl-chip">scikit-learn</span><span class="bl-chip">REST API</span>
+      </div>
+      <a class="bl-card-link" href="https://github.com/affan123459/Titanic-Model-LogisticRegressionFlaskAPI/tree/master" target="_blank" rel="noopener">View code on GitHub →</a>
+    </div>
+    <div class="bl-card bl-card-open reveal">
+      <span class="bl-tag">Next up</span>
+      <h3>Your project could go here</h3>
+      <p>I'm currently taking on new contract work — internal tools, automations, API integrations, small AI features. If you've got a backlog item that's been sitting untouched, send it over and I'll tell you honestly if I can help.</p>
+      <a class="bl-card-link mailto-trigger" href="mailto:mohammadaffan1239@mail.com">Start a conversation →</a>
+    </div>
+  </section>
+
+  <section id="ask">
+    <div class="bl-head">
+      <div class="bl-eyebrow">LIVE DEMO</div>
+      <h2>Ask my AI assistant</h2>
+      <p class="bl-note">A real AI API call running on a small backend I built and deployed myself — scoped to answer questions about my work. Rate-limited, so go easy on it.</p>
+    </div>
+    <div class="terminal-chat reveal">
+      <div class="chat-titlebar">
+        <span class="tdot td1"></span><span class="tdot td2"></span><span class="tdot td3"></span>
+        &nbsp;ask-affan — zsh
+      </div>
+      <div class="chat-window" id="chat-window">
+        <div class="chat-msg bot">Hi — I'm an AI assistant trained on Affan's background. Ask me about his skills, projects, or availability for work.</div>
+      </div>
+      <div class="chat-quick">
+        <button class="chip-btn" data-q="What's your tech stack?">What's your tech stack?</button>
+        <button class="chip-btn" data-q="Are you available for contract work?">Available for work?</button>
+        <button class="chip-btn" data-q="Tell me about your projects">Tell me about your projects</button>
+      </div>
+      <form id="chat-form" class="chat-input-row">
+        <input id="chat-input" type="text" placeholder="Type a question…" autocomplete="off" maxlength="200" required>
+        <button type="submit" class="btn btn-primary">Send</button>
+      </form>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="bl-head">
+      <div class="bl-eyebrow">GET IN TOUCH</div>
+      <h2>Got something that needs building?</h2>
+    </div>
+    <div class="bl-contact-grid reveal">
+      <div class="bl-contact-text">
+        <p>I'm available for contract and freelance work right now. Happy to take a quick free look at what you're dealing with before any commitment.</p>
+        <a href="mailto:mohammadaffan1239@mail.com" class="btn btn-primary mailto-trigger">Email me directly</a>
+      </div>
+      <div class="bl-contact-list">
+        <div><span class="label">Location</span>Bangalore, India (remote-friendly)</div>
+        <div><span class="label">Email</span><span id="email-text">mohammadaffan1239@mail.com</span><button class="copy-btn" onclick="copyEmail()">copy</button></div>
+        <div><span class="label">Phone</span>+91 9591487129</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <span>© 2026 Mohammed Affan</span>
+  <span class="bl-social">
+    <a href="https://www.linkedin.com/in/md-affan-023632387/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://github.com/affan123459" target="_blank" rel="noopener">GitHub</a>
+  </span>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+  var EMAIL = 'mohammadaffan1239@mail.com';
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function showToast(msg){
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(t._timer);
+    t._timer = setTimeout(function(){ t.classList.remove('show'); }, 3200);
+  }
+
+  function copyEmail(){
+    navigator.clipboard.writeText(EMAIL).then(function(){
+      var btn = document.querySelector('.copy-btn');
+      var original = btn.innerText;
+      btn.innerText = 'copied!';
+      showToast('Email copied to clipboard');
+      setTimeout(function(){ btn.innerText = original; }, 1500);
+    }).catch(function(){ showToast('Could not copy — email is ' + EMAIL); });
+  }
+
+  document.querySelectorAll('.mailto-trigger').forEach(function(el){
+    el.addEventListener('click', function(){
+      setTimeout(function(){
+        navigator.clipboard.writeText(EMAIL).then(function(){
+          showToast('Opening your mail app… if nothing happens, email copied: ' + EMAIL);
+        }).catch(function(){});
+      }, 350);
+    });
+  });
+
+  window.addEventListener('scroll', function(){
+    var nav = document.querySelector('.bl-nav');
+    if (window.scrollY > 8) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+
+  if ('IntersectionObserver' in window){
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(function(el){ observer.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('is-visible'); });
+  }
+
+  if (!reduceMotion){
+    document.querySelectorAll('.bl-card').forEach(function(card){
+      card.addEventListener('mousemove', function(e){
+        var rect = card.getBoundingClientRect();
+        var x = e.clientX - rect.left, y = e.clientY - rect.top;
+        var cx = rect.width/2, cy = rect.height/2;
+        var rx = ((y-cy)/cy) * -3.5, ry = ((x-cx)/cx) * 3.5;
+        card.style.transform = 'perspective(800px) rotateX('+rx+'deg) rotateY('+ry+'deg) translateY(-2px)';
+        card.style.setProperty('--mx', x+'px');
+        card.style.setProperty('--my', y+'px');
+      });
+      card.addEventListener('mouseleave', function(){ card.style.transform = ''; });
+    });
+  }
+
+  // ---- Terminal typewriter near hero ----
+  var lines = [
+    'whoami  →  Mohammed Affan, full-stack developer',
+    'status  →  open_for_contract_work: true',
+    'stack   →  Python · React · Flask · TensorFlow'
+  ];
+  var typedEl = document.getElementById('typed-text');
+  if (reduceMotion){
+    typedEl.textContent = ' ' + lines[0];
+  } else {
+    (function typeLoop(){
+      var li = 0;
+      function typeLine(){
+        var text = lines[li], ci = 0;
+        typedEl.textContent = ' ';
+        (function step(){
+          if (ci <= text.length){
+            typedEl.textContent = ' ' + text.slice(0, ci);
+            ci++;
+            setTimeout(step, 28);
+          } else {
+            setTimeout(function(){
+              li = (li+1) % lines.length;
+              typeLine();
+            }, 2200);
+          }
+        })();
+      }
+      typeLine();
+    })();
+  }
+
+  // ---- Canvas particle / geometric network background ----
+  (function(){
+    var canvas = document.getElementById('bg-canvas');
+    var ctx = canvas.getContext('2d');
+    var w, h, points = [];
+    function resize(){
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+    var N = Math.min(70, Math.max(20, Math.floor((w*h)/24000)));
+    for (var i=0; i<N; i++){
+      points.push({
+        x: Math.random()*w, y: Math.random()*h,
+        vx: (Math.random()-0.5)*0.18, vy: (Math.random()-0.5)*0.18,
+        shape: Math.floor(Math.random()*3)
+      });
+    }
+    function drawShape(p){
+      ctx.beginPath();
+      if (p.shape === 0){ ctx.arc(p.x, p.y, 2.1, 0, Math.PI*2); }
+      else if (p.shape === 1){ ctx.rect(p.x-2.2, p.y-2.2, 4.4, 4.4); }
+      else { ctx.moveTo(p.x, p.y-3); ctx.lineTo(p.x+3, p.y+2); ctx.lineTo(p.x-3, p.y+2); ctx.closePath(); }
+      ctx.fill();
+    }
+    function tick(){
+      ctx.clearRect(0,0,w,h);
+      ctx.fillStyle = 'rgba(110,139,255,0.5)';
+      ctx.strokeStyle = 'rgba(110,139,255,0.10)';
+      for (var i=0; i<points.length; i++){
+        var p = points[i];
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > w) p.vx *= -1;
+        if (p.y < 0 || p.y > h) p.vy *= -1;
+        drawShape(p);
+        for (var j=i+1; j<points.length; j++){
+          var q = points[j];
+          var dx = p.x-q.x, dy = p.y-q.y;
+          var dist = Math.sqrt(dx*dx+dy*dy);
+          if (dist < 140){
+            ctx.globalAlpha = 1 - (dist/140);
+            ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y); ctx.stroke();
+            ctx.globalAlpha = 1;
+          }
+        }
+      }
+      if (!reduceMotion) requestAnimationFrame(tick);
+    }
+    tick();
+  })();
+
+  // ---- Chat widget ----
+  (function(){
+    var windowEl = document.getElementById('chat-window');
+    var form = document.getElementById('chat-form');
+    var input = document.getElementById('chat-input');
+
+    function addMsg(text, cls){
+      var div = document.createElement('div');
+      div.className = 'chat-msg ' + cls;
+      div.textContent = text;
+      windowEl.appendChild(div);
+      windowEl.scrollTop = windowEl.scrollHeight;
+      return div;
+    }
+
+    function sendMessage(text){
+      if (!text.trim()) return;
+      addMsg(text, 'user');
+      input.value = '';
+      input.disabled = true;
+      var thinking = addMsg('…thinking', 'bot');
+
+      fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: text })
+      })
+      .then(function(res){
+        return res.json().then(function(data){ return { ok: res.ok, status: res.status, data: data }; });
+      })
+      .then(function(result){
+        thinking.remove();
+        if (!result.ok){
+          if (result.status === 429){
+            addMsg("You've hit today's question limit on this demo — email me directly and I'll reply personally!", 'error');
+          } else {
+            addMsg("Something went wrong on my end — try again in a moment, or email me directly.", 'error');
+          }
+          return;
+        }
+        addMsg(result.data.reply || "Sorry, I didn't get a reply that time.", 'bot');
+      })
+      .catch(function(){
+        thinking.remove();
+        addMsg("Couldn't reach the server — this demo only works on the live deployed site, not a local file preview.", 'error');
+      })
+      .finally(function(){
+        input.disabled = false;
+        input.focus();
+      });
+    }
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      sendMessage(input.value);
+    });
+
+    document.querySelectorAll('.chip-btn').forEach(function(btn){
+      btn.addEventListener('click', function(){ sendMessage(btn.getAttribute('data-q')); });
+    });
+  })();
+</script>
+
+</body>
+</html>
